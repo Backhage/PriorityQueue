@@ -69,7 +69,6 @@ namespace PriorityQueue
                 Swap(parentIndex, leftChildIndex);
                 parentIndex = leftChildIndex;
             }
-
         }
 
         private void Swap(int index1, int index2)

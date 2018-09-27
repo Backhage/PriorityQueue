@@ -50,10 +50,10 @@ namespace PriorityQueue.Test
             Assert.Equal(item3, _pq.Dequeue());
         }
 
-        [Fact]
+        [Fact(Timeout = 10000)]
         public void QueueCanHandleLargeAmountsOfItems_WithGoodPerformance()
         {
-            const int itemCount = 100_000;
+            const int itemCount = 1_000_000;
             var rnd = new Random();
 
             for (var i = 0; i < itemCount; i++)
