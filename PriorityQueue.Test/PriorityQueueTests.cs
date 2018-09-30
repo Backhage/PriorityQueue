@@ -45,9 +45,9 @@ namespace PriorityQueue.Test
             _pq.Enqueue(item2);
             _pq.Enqueue(item3);
 
-            Assert.Equal(item1, _pq.Dequeue());
-            Assert.Equal(item2, _pq.Dequeue());
-            Assert.Equal(item3, _pq.Dequeue());
+            Assert.Same(item1, _pq.Dequeue());
+            Assert.Same(item2, _pq.Dequeue());
+            Assert.Same(item3, _pq.Dequeue());
         }
 
         [Fact(Timeout = 10000)]

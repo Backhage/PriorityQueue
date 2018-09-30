@@ -62,7 +62,7 @@ namespace PriorityQueue
                 {
                     leftChildIndex = rightChildIndex;
                 }
-                if (_items[parentIndex].CompareTo(_items[leftChildIndex]) <= 0)
+                if (_items[parentIndex].CompareTo(_items[leftChildIndex]) < 0)
                 {
                     break;
                 }
