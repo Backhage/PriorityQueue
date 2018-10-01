@@ -5,21 +5,23 @@ namespace PriorityQueue
 {
     public class PriorityQueue<T> where T : IComparable<T>
     {
-        private readonly List<T> _items = new List<T>();
+        private readonly List<T> _pq = new List<T>();
+
+        public int Count => _pq.Count;
 
         public void Enqueue(T item)
         {
-            _items.Add(item);
+            _pq.Add(item);
             BubbleUp();
         }
 
         private void BubbleUp()
         {
-            var childIndex = _items.Count - 1;
+            var childIndex = _pq.Count - 1;
             while (childIndex > 0)
             {
                 var parentIndex = (childIndex - 1) / 2;
-                if (_items[childIndex].CompareTo(_items[parentIndex]) >= 0)
+                if (_pq[childIndex].CompareTo(_pq[parentIndex]) >= 0)
                 {
                     break;
                 }
@@ -30,7 +32,7 @@ namespace PriorityQueue
 
         public T Dequeue()
         {
-            var highestPrioritizedItem = _items[0];
+            var highestPrioritizedItem = _pq[0];
 
             MoveLastItemToTheTop();
             SinkDown();
@@ -40,42 +42,42 @@ namespace PriorityQueue
 
         private void MoveLastItemToTheTop()
         {
-            var lastIndex = _items.Count - 1;
-            _items[0] = _items[lastIndex];
-            _items.RemoveAt(lastIndex);
+            var lastIndex = _pq.Count - 1;
+            _pq[0] = _pq[lastIndex];
+            _pq.RemoveAt(lastIndex);
         }
 
         private void SinkDown()
         {
-            var lastIndex = _items.Count - 1;
+            var lastIndex = _pq.Count - 1;
             var parentIndex = 0;
 
             while (true)
             {
-                var leftChildIndex = parentIndex * 2 + 1;
-                if (leftChildIndex > lastIndex)
+                var firstChildIndex = parentIndex * 2 + 1;
+                if (firstChildIndex > lastIndex)
                 {
                     break;
                 }
-                var rightChildIndex = leftChildIndex + 1;
-                if (rightChildIndex <= lastIndex && _items[rightChildIndex].CompareTo(_items[leftChildIndex]) < 0)
+                var secondChildIndex = firstChildIndex + 1;
+                if (secondChildIndex <= lastIndex && _pq[secondChildIndex].CompareTo(_pq[firstChildIndex]) < 0)
                 {
-                    leftChildIndex = rightChildIndex;
+                    firstChildIndex = secondChildIndex;
                 }
-                if (_items[parentIndex].CompareTo(_items[leftChildIndex]) < 0)
+                if (_pq[parentIndex].CompareTo(_pq[firstChildIndex]) < 0)
                 {
                     break;
                 }
-                Swap(parentIndex, leftChildIndex);
-                parentIndex = leftChildIndex;
+                Swap(parentIndex, firstChildIndex);
+                parentIndex = firstChildIndex;
             }
         }
 
         private void Swap(int index1, int index2)
         {
-            var tmp = _items[index1];
-            _items[index1] = _items[index2];
-            _items[index2] = tmp;
+            var tmp = _pq[index1];
+            _pq[index1] = _pq[index2];
+            _pq[index2] = tmp;
         }
     }
 }

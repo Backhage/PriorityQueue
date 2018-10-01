@@ -19,6 +19,18 @@ namespace PriorityQueue.Test
         }
 
         [Fact]
+        public void TheCountPropertyReflectsNumberOfElementsInQueue()
+        {
+            Assert.Equal(0, _pq.Count);
+
+            _pq.Enqueue(new ComparableThing(1));
+            Assert.Equal(1, _pq.Count);
+
+            _pq.Dequeue();
+            Assert.Equal(0, _pq.Count);
+        }
+
+        [Fact]
         public void HighestPriorityItems_GetsDequedFirst()
         {
             var lowPrio = new ComparableThing(3);
